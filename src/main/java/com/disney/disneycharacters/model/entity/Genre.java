@@ -1,28 +1,27 @@
 package com.disney.disneycharacters.model.entity;
 
-import com.disney.disneycharacters.model.entity.base.BaseEntity;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 @Getter
 @Setter
-@RequiredArgsConstructor
 @Entity
-public class Genre extends BaseEntity {
+@Table( name = "genre" )
+public class Genre {
 
-    @NotBlank( message = "Title cannot be blank" )
-    @Size( max = 50, message = "Title must be at most 50 characters long" )
+    @Id
+    @GeneratedValue( strategy = IDENTITY )
+    @Column( name = "genre_id" )
+    private Long genreId;
     private String name;
 
-    @OneToMany( mappedBy = "genre", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, targetEntity = Movie.class )
-    @ToString.Exclude
+
+    @OneToMany( mappedBy = "genre", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, targetEntity = Movie.class)
     private Set<Movie> movies = new HashSet<>();
 }
