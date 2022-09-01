@@ -1,11 +1,13 @@
 package com.disney.disneycharacters.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
@@ -14,6 +16,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Setter
 @Entity
 @Table( name = "movie" )
+@JsonIdentityInfo( generator = ObjectIdGenerators.UUIDGenerator.class, property="@UUID")
 public class Movie {
 
     @Id
@@ -28,13 +31,13 @@ public class Movie {
     private Integer rating;
 
 
-    @ManyToOne(fetch = LAZY, optional = false)
+    /*@ManyToOne( fetch = LAZY, optional = false )
     @JoinColumn( name = "genre_id", nullable = false )
-    private Genre genre;
+    private Genre genre;*/
 
     @JoinTable( name = "movie_actors",
                 joinColumns = @JoinColumn( name = "movie_id" ),
                 inverseJoinColumns = @JoinColumn( name = "actor_id" ) )
-    @ManyToMany( fetch = LAZY, targetEntity = Movie.class)
-    private Set<Actor> actors = new HashSet<>();
+    @ManyToMany( fetch = LAZY, targetEntity = Movie.class )
+    private List<Actor> actors = new ArrayList<>();
 }

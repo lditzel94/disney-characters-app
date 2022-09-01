@@ -1,11 +1,13 @@
 package com.disney.disneycharacters.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import static javax.persistence.CascadeType.PERSIST;
 import static javax.persistence.FetchType.LAZY;
@@ -15,6 +17,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Setter
 @Entity
 @Table( name = "actor" )
+@JsonIdentityInfo( generator = ObjectIdGenerators.UUIDGenerator.class, property="@UUID")
 public class Actor {
 
     @Id
@@ -31,6 +34,6 @@ public class Actor {
     // TODO: Research for @Lob annotation, this may help with data types that need to be large sets
     private String story;
 
-    @ManyToMany( mappedBy = "actors", fetch = LAZY, cascade = PERSIST)
-    private Set<Movie> movies = new HashSet<>();
+    @ManyToMany( mappedBy = "actors", fetch = LAZY, cascade = PERSIST )
+    private List<Movie> movies = new ArrayList<>();
 }

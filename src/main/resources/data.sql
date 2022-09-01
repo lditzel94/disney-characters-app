@@ -1,11 +1,11 @@
-INSERT INTO genre (genre_id, name)
+/*INSERT INTO genre (genre_id, name)
 VALUES (0, 'Infatil'),
-       (1, 'Ficción');
+       (1, 'Ficción');*/
 
-INSERT INTO movie (movie_id, genre_id, title, release_date, rating)
-VALUES (0, 0, 'Toy Story', '1994', 5),
-       (1, 0, 'Toy Story 2', '2000', 3),
-       (2, 1, 'Star Wars', '1977', 4);
+INSERT INTO movie (movie_id, title, release_date, rating)
+VALUES (0, 'Toy Story', '1994', 5),
+       (1, 'Toy Story 2', '2000', 3),
+       (2, 'Star Wars', '1977', 4);
 
 INSERT INTO actor (actor_id, name, age, weight, story)
 VALUES (0, 'Woody', '30', 0.25, 'Es un comisario'),

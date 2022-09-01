@@ -1,12 +1,11 @@
 package com.disney.disneycharacters.controller;
 
+import com.disney.disneycharacters.model.dto.ActorDto;
 import com.disney.disneycharacters.model.entity.Actor;
 import com.disney.disneycharacters.repository.ActorRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -17,9 +16,10 @@ public class ActorController {
     private final ActorRepository actorRepository;
 
     @GetMapping( "/{id}" )
-    public Actor getActor( @PathVariable Long id ) {
-        Optional<Actor> actor = actorRepository.findById( id );
-        return actor.get();
+    public ActorDto getActorDetail( @PathVariable Long id ) {
+        var actor = actorRepository.findById( id ).get();
+
+        return new ActorDto( actor );
     }
 
     // TODO: Search for a bulkified option to build the creation method

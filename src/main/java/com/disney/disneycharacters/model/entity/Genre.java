@@ -4,8 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -22,6 +20,6 @@ public class Genre {
     private String name;
 
 
-    @OneToMany( mappedBy = "genre", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, targetEntity = Movie.class)
-    private Set<Movie> movies = new HashSet<>();
+    /*@OneToMany( mappedBy = "genre", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, targetEntity = Movie.class )
+    private List<Movie> movies = new ArrayList<>();*/
 }
