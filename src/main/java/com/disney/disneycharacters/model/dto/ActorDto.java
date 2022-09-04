@@ -1,6 +1,7 @@
 package com.disney.disneycharacters.model.dto;
 
 import com.disney.disneycharacters.model.entity.Actor;
+import com.disney.disneycharacters.model.entity.Movie;
 import lombok.Data;
 
 import java.util.Collection;
@@ -25,5 +26,20 @@ public class ActorDto {
                         .stream()
                         .map( MovieDto::new )
                         .collect( Collectors.toList() ) );
+    }
+
+    @Data
+    private static class MovieDto {
+        private Long movieId;
+        private String title;
+        private String releaseDate;
+        private Integer rating;
+
+        public MovieDto( Movie movie ) {
+            setMovieId( movie.getMovieId() );
+            setTitle( movie.getTitle() );
+            setReleaseDate( movie.getReleaseDate() );
+            setRating( movie.getRating() );
+        }
     }
 }

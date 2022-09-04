@@ -31,13 +31,13 @@ public class Movie {
     private Integer rating;
 
 
-    /*@ManyToOne( fetch = LAZY, optional = false )
+    @ManyToOne( fetch = LAZY, optional = false )
     @JoinColumn( name = "genre_id", nullable = false )
-    private Genre genre;*/
+    private Genre genre;
 
     @JoinTable( name = "movie_actors",
                 joinColumns = @JoinColumn( name = "movie_id" ),
                 inverseJoinColumns = @JoinColumn( name = "actor_id" ) )
-    @ManyToMany( fetch = LAZY, targetEntity = Movie.class )
+    @ManyToMany( fetch = LAZY )
     private List<Actor> actors = new ArrayList<>();
 }
