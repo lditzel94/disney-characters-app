@@ -1,4 +1,4 @@
-package com.disney.disneycharacters.model.dto;
+package com.disney.disneycharacters.model.dto.movie;
 
 import com.disney.disneycharacters.model.entity.Actor;
 import com.disney.disneycharacters.model.entity.Movie;

@@ -1,6 +1,6 @@
 package com.disney.disneycharacters.controller;
 
-import com.disney.disneycharacters.model.dto.MovieDto;
+import com.disney.disneycharacters.model.dto.movie.MovieDto;
 import com.disney.disneycharacters.repository.MovieRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping( "/api/movies" )
-public class MovieController {
+class MovieController {
 
     private final MovieRepository movieRepository;
 
