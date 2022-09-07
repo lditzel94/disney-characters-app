@@ -12,15 +12,7 @@ public interface ActorMapper {
     @Mapping( target = "id", source = "actorId" )
     ActorDetailDto actorToActorDetailDto( Actor actor );
 
-    @Mapping( target = "actorId", source = "id" )
-    Actor actorDetailDtoToActor( ActorDetailDto actor );
-
     Actor actorPostToActor( ActorPostDto actor );
-
-    /*ActorPostDto actorToActorPost( Actor actor );
-
-    ActorPatchDto actorToActorPatch( Actor actor );*/
-
 
     @BeanMapping( nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE )
     void actorPatchToActor( ActorPatchDto actorPatchDto, @MappingTarget Actor actor );
