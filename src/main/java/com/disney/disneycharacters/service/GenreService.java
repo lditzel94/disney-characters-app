@@ -6,5 +6,5 @@ import java.util.Optional;
 
 public interface GenreService {
 
-    public Optional<Genre> createGenre( Genre genre );
+    Optional<Genre> createGenre( Genre genre );
 }

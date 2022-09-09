@@ -7,8 +7,10 @@ import com.disney.disneycharacters.model.entity.Actor;
 import com.disney.disneycharacters.repository.ActorRepository;
 import com.disney.disneycharacters.service.ActorService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -17,28 +19,38 @@ public class ActorServiceImpl implements ActorService {
     private final ActorRepository actorRepository;
     private final ActorMapper actorMapper;
 
+
     @Override
-    public Optional<Actor> getActorDetail( Long id ) {
-        var actor = actorRepository.findById( id );
+    public List<Actor> getAllActors() {
+        return actorRepository.findAll();
+    }
+
+    @Override
+    public Actor getActorDetail( Long id ) throws ResourceNotFoundException {
+        var actor = actorRepository.findById( id ).orElseThrow( ResourceNotFoundException::new );
         return actor;
     }
 
     @Override
     public Optional<Actor> createActor( Actor actor ) {
-        Actor saved = actorRepository.save( actor );
+        var saved = actorRepository.save( actor );
         return Optional.of( saved );
     }
 
     @Override
     public Actor updateActor( ActorPatchDto actor, Long id ) throws ResourceNotFoundException {
-        Actor found = actorRepository.findById( id ).orElseThrow( ResourceNotFoundException::new );
+        var found = actorRepository.findById( id ).orElseThrow( ResourceNotFoundException::new );
         actorMapper.actorPatchToActor( actor, found );
 
         return actorRepository.save( found );
     }
 
     @Override
-    public void deleteActorById( Long id ) {
-        actorRepository.deleteById( id );
+    public void deleteActorById( Long id ) throws ResourceNotFoundException {
+        try {
+            actorRepository.deleteById( id );
+        } catch ( EmptyResultDataAccessException exception ) {
+            throw new ResourceNotFoundException();
+        }
     }
 }
