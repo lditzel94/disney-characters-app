@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static org.springframework.http.HttpStatus.OK;
@@ -54,7 +55,7 @@ class ActorController {
 
     @DeleteMapping( "/{id}" )
     @ResponseStatus( OK )
-    public void deleteCharacter( @PathVariable Long id ) throws ResourceNotFoundException{
+    public void deleteCharacter( @PathVariable Long id ) throws ResourceNotFoundException {
         actorService.deleteActorById( id );
     }
 

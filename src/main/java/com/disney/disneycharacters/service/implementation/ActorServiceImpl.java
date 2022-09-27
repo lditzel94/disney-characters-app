@@ -6,18 +6,22 @@ import com.disney.disneycharacters.model.dto.actor.ActorPatchDto;
 import com.disney.disneycharacters.model.entity.Actor;
 import com.disney.disneycharacters.repository.ActorRepository;
 import com.disney.disneycharacters.service.ActorService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@RequiredArgsConstructor
+
 @Service
 public class ActorServiceImpl implements ActorService {
     private final ActorRepository actorRepository;
     private final ActorMapper actorMapper;
+
+    public ActorServiceImpl( ActorRepository actorRepository, ActorMapper actorMapper ) {
+        this.actorRepository = actorRepository;
+        this.actorMapper = actorMapper;
+    }
 
 
     @Override
