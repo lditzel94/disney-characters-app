@@ -1,10 +1,12 @@
 package com.disney.disneycharacters.service;
 
-import com.disney.disneycharacters.model.entity.Genre;
+import com.disney.disneycharacters.model.dto.genre.GenrePostDto;
 
-import java.util.Optional;
+import java.util.List;
 
 public interface GenreService {
 
-    Optional<Genre> createGenre( Genre genre );
+    GenrePostDto create( GenrePostDto genre );
+
+    List<GenrePostDto> getAll();
 }

@@ -14,12 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping( "/api/movies" )
 class MovieController {
-
-    private final MovieRepository movieRepository;
+    private final MovieRepository repository;
 
     @GetMapping( "/{id}" )
-    public MovieDto getMovieDetail( @PathVariable Long id ) {
-        var movie = movieRepository.findById( id ).get();
+    MovieDto getMovieDetail( @PathVariable Long id ) {
+        var movie = repository.findById( id ).get();
         return new MovieDto( movie );
     }
 }

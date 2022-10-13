@@ -9,5 +9,5 @@ public interface GenreMapper {
 
     Genre genrePostDtoToGenre( GenrePostDto genre );
 
-    GenrePostDto genreToGenrePostDtoTo( Genre genre );
+    GenrePostDto genreToGenrePostDto( Genre genre );
 }
