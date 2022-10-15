@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Primary;
 import javax.sql.DataSource;
 
 @Configuration
-public class DataSourceConfig {
+public class DataSourceConfiguration {
 
     /*@Bean
     public DataSource dataSource() {
@@ -25,7 +25,7 @@ public class DataSourceConfig {
     @Bean
     @Primary
     public DataSource dataSource() {
-        DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
+        DataSourceBuilder<?> dataSourceBuilder = DataSourceBuilder.create();
         dataSourceBuilder.driverClassName( "org.h2.Driver" );
         dataSourceBuilder.url( "jdbc:h2:mem:testdb" );
         dataSourceBuilder.username( "sa" );

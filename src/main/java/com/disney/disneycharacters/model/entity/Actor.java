@@ -1,13 +1,11 @@
 package com.disney.disneycharacters.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import static javax.persistence.CascadeType.PERSIST;
 import static javax.persistence.FetchType.LAZY;
@@ -17,14 +15,13 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Setter
 @Entity
 @Table( name = "actor" )
-@JsonIdentityInfo( generator = ObjectIdGenerators.UUIDGenerator.class, property="@UUID")
 public class Actor {
-
     @Id
     @GeneratedValue( strategy = IDENTITY )
     @Column( name = "actor_id" )
     private Long actorId;
 
+    @Column( unique = true )
     private String name;
 
     private String age;
@@ -35,5 +32,5 @@ public class Actor {
     private String story;
 
     @ManyToMany( mappedBy = "actors", fetch = LAZY, cascade = PERSIST )
-    private List<Movie> movies = new ArrayList<>();
+    private Set<Movie> movies = new HashSet<>();
 }

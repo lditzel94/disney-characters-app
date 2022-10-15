@@ -1,42 +1,59 @@
 package com.disney.disneycharacters.controller;
 
-import com.disney.disneycharacters.model.dto.ActorDto;
-import com.disney.disneycharacters.model.entity.Actor;
-import com.disney.disneycharacters.repository.ActorRepository;
+import com.disney.disneycharacters.exception.ResourceNotFoundException;
+import com.disney.disneycharacters.model.dto.actor.ActorDetailDto;
+import com.disney.disneycharacters.model.dto.actor.ActorPatchDto;
+import com.disney.disneycharacters.model.dto.actor.ActorPostDto;
+import com.disney.disneycharacters.service.ActorService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.List;
+
+import static org.springframework.http.HttpStatus.OK;
 
 @Slf4j
 @RequiredArgsConstructor
 @RestController
 @RequestMapping( "/api/characters" )
-public class ActorController {
+class ActorController {
+    private final ActorService service;
 
-    private final ActorRepository actorRepository;
-
-    @GetMapping( "/{id}" )
-    public ActorDto getActorDetail( @PathVariable Long id ) {
-        var actor = actorRepository.findById( id ).get();
-
-        return new ActorDto( actor );
+    @GetMapping
+    List<ActorDetailDto> getAllActors() {
+        return service.getAllActors();
     }
 
-    // TODO: Search for a bulkified option to build the creation method
+    @GetMapping( "/{id}" )
+    ActorDetailDto getActorDetailById( @PathVariable Long id ) throws ResourceNotFoundException {
+        return service.getActorDetailById( id );
+    }
+
+    @GetMapping( params = "name" )
+    ActorDetailDto getActorDetailByName( @RequestParam String name ) throws ResourceNotFoundException {
+        return service.getActorDetailByName( name );
+    }
+
+    @GetMapping( params = "age" )
+    ActorDetailDto getActorDetailByAge( @RequestParam String age ) throws ResourceNotFoundException {
+        return service.getActorDetailByAge( age );
+    }
+
     @PostMapping
-    public void createCharacters( @RequestBody Actor actor ) {
-        log.info( "Post Movie character: " + actor );
+    ActorDetailDto createActor( @Valid @RequestBody ActorPostDto actorDto ) {
+        return service.createActor( actorDto );
     }
 
     @PatchMapping( "/{id}" )
-    public void updateCharacter( @RequestBody Actor actor, @PathVariable Long id ) {
-        log.info( "Patch Movie character: " + actor );
-        log.info( "Patch character id: " + id );
+    ActorDetailDto updateActor( @RequestBody ActorPatchDto actor, @PathVariable Long id ) throws ResourceNotFoundException {
+        return service.updateActor( actor, id );
     }
 
+    @ResponseStatus( OK )
     @DeleteMapping( "/{id}" )
-    public void deleteCharacter( @PathVariable Long id ) {
-        log.info( "Delete character id: " + id );
+    void deleteActor( @PathVariable Long id ) throws ResourceNotFoundException {
+        service.deleteActorById( id );
     }
-
 }
