@@ -1,22 +1,23 @@
 package com.disney.disneycharacters.model.dto.movie;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
-@Getter
-@Setter
-@ToString
-public class MoviePostDto {
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
-    @JsonProperty( "title" )
-    private String title;
 
-    @JsonProperty( "releaseDate" )
-    private String releaseDate;
+public record MoviePostDto(
+        @NotBlank( message = "Title cannot be empty or null" )
+        @JsonProperty( "title" )
+        String title,
 
-    @JsonProperty( "rating" )
-    private Integer rating;
+        @NotBlank( message = "Release date cannot be empty or null" )
+        @JsonProperty( "releaseDate" )
+        String releaseDate,
 
+        @NotNull( message = "Rating cannot be empty or null" )
+        @JsonProperty( "rating" )
+        Integer rating
+
+) {
 }

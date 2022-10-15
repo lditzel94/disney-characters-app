@@ -12,7 +12,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -24,40 +23,40 @@ public class ActorServiceImpl implements ActorService {
     public List<ActorDetailDto> getAllActors() {
         var actors = repository.findAll();
         return actors.stream()
-                     .map( mapper::actorToActorDetailDto )
-                     .collect( Collectors.toList() );
+                     .map( mapper::actorToActorDetail )
+                     .toList();
     }
 
     @Override
     public ActorDetailDto getActorDetailById( Long id ) throws ResourceNotFoundException {
         var actor = repository.findById( id )
                               .orElseThrow( ResourceNotFoundException::new );
-        return mapper.actorToActorDetailDto( actor );
+        return mapper.actorToActorDetail( actor );
     }
 
     @Override
     public ActorDetailDto getActorDetailByName( String name ) throws ResourceNotFoundException {
         var actor = repository.findByName( name ).orElseThrow( ResourceNotFoundException::new );
-        return mapper.actorToActorDetailDto( actor );
+        return mapper.actorToActorDetail( actor );
     }
 
     @Override
     public ActorDetailDto getActorDetailByAge( String age ) throws ResourceNotFoundException {
         var actor = repository.findByAge( age ).orElseThrow( ResourceNotFoundException::new );
-        return mapper.actorToActorDetailDto( actor );
+        return mapper.actorToActorDetail( actor );
     }
 
     @Override
-    public ActorDetailDto createActor( ActorPostDto actorDto ) {
-        var saved = repository.save( mapper.actorPostToActor( actorDto ) );
-        return mapper.actorToActorDetailDto( saved );
+    public ActorDetailDto createActor( ActorPostDto actor ) {
+        var saved = repository.save( mapper.actorPostToActor( actor ) );
+        return mapper.actorToActorDetail( saved );
     }
 
     @Override
     public ActorDetailDto updateActor( ActorPatchDto actorPatch, Long id ) throws ResourceNotFoundException {
         var actor = repository.findById( id ).orElseThrow( ResourceNotFoundException::new );
         mapper.actorPatchToActor( actorPatch, actor );
-        return mapper.actorToActorDetailDto( repository.save( actor ) );
+        return mapper.actorToActorDetail( repository.save( actor ) );
     }
 
     @Override
@@ -65,7 +64,7 @@ public class ActorServiceImpl implements ActorService {
         try {
             repository.deleteById( id );
         } catch ( EmptyResultDataAccessException exception ) {
-            throw new ResourceNotFoundException();
+            throw new ResourceNotFoundException( exception.getMessage() );
         }
     }
 }

@@ -2,29 +2,26 @@ package com.disney.disneycharacters.model.dto.movie;
 
 import com.disney.disneycharacters.model.dto.actor.ActorSlimDto;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.Set;
 
-@Getter
-@Setter
-public class MovieDetailDto {
-    @JsonProperty( "id" )
-    private Long movieId;
+public record MovieDetailDto(
+        @JsonProperty( "id" )
+        Long id,
 
-    @JsonProperty( "title" )
-    private String title;
+        @JsonProperty( "title" )
+        String title,
 
-    @JsonProperty( "releaseDate" )
-    private String releaseDate;
+        @JsonProperty( "releaseDate" )
+        String releaseDate,
 
-    @JsonProperty( "rating" )
-    private Integer rating;
+        @JsonProperty( "rating" )
+        Integer rating,
 
-    /*@JsonProperty( "genre" )
-    private String genre;*/
+        @JsonProperty( "genre" )
+        String genre,
 
-    @JsonProperty( "actors" )
-    private Set<ActorSlimDto> actors;
+        @JsonProperty( "actors" )
+        Set<ActorSlimDto> actors
+) {
 }

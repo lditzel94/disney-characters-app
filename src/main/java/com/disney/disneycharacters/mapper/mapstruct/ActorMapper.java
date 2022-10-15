@@ -10,7 +10,7 @@ import org.mapstruct.*;
 public interface ActorMapper {
 
     @Mapping( target = "id", source = "actorId" )
-    ActorDetailDto actorToActorDetailDto( Actor actor );
+    ActorDetailDto actorToActorDetail( Actor actor );
 
     Actor actorPostToActor( ActorPostDto actor );
 

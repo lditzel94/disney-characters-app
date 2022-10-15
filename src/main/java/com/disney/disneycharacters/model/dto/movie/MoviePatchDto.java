@@ -2,11 +2,7 @@ package com.disney.disneycharacters.model.dto.movie;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-
-public record MovieSlimDto(
-        @JsonProperty( "id" )
-        Long movieId,
-
+public record MoviePatchDto(
         @JsonProperty( "title" )
         String title,
 
@@ -16,6 +12,4 @@ public record MovieSlimDto(
         @JsonProperty( "rating" )
         Integer rating
 ) {
-    /*@JsonProperty("genre")
-    private Genre genre;*/
 }

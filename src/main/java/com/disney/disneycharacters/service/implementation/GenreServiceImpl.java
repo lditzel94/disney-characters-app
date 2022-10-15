@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -29,6 +28,6 @@ public class GenreServiceImpl implements GenreService {
         var genres = genreRepository.findAll();
         return genres.stream()
                      .map( genreMapper::genreToGenrePostDto )
-                     .collect( Collectors.toList() );
+                     .toList();
     }
 }

@@ -8,6 +8,8 @@ import com.disney.disneycharacters.model.dto.actor.ActorPostDto;
 import java.util.List;
 
 public interface ActorService {
+    List<ActorDetailDto> getAllActors();
+
     ActorDetailDto getActorDetailById( Long id ) throws ResourceNotFoundException;
 
     ActorDetailDto getActorDetailByName( String name ) throws ResourceNotFoundException;
@@ -19,8 +21,5 @@ public interface ActorService {
     ActorDetailDto updateActor( ActorPatchDto actor, Long id ) throws ResourceNotFoundException;
 
     void deleteActorById( Long id ) throws ResourceNotFoundException;
-
-    List<ActorDetailDto> getAllActors();
-
 
 }

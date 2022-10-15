@@ -26,8 +26,8 @@ public class Movie {
 
     private Integer rating;
 
-    @ManyToOne( fetch = LAZY, optional = false )
-    @JoinColumn( name = "genre_id", nullable = false )
+    @ManyToOne( fetch = LAZY, optional = true )
+    @JoinColumn( name = "genre_id", nullable = true )
     private Genre genre;
 
     @JoinTable( name = "movie_actors",

@@ -3,18 +3,19 @@ package com.disney.disneycharacters.model.dto.actor;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
-public record ActorSlimDto( @JsonProperty( "id" )
-                            Long actorId,
+public record ActorSlimDto(
+        @JsonProperty( "id" )
+        Long actorId,
 
-                            @JsonProperty( "name" )
-                            String name,
+        @JsonProperty( "name" )
+        String name,
 
-                            @JsonProperty( "age" )
-                            String age,
+        @JsonProperty( "age" )
+        String age,
 
-                            @JsonProperty( "weight" )
-                            Double weight,
+        @JsonProperty( "weight" )
+        Double weight,
 
-                            @JsonProperty( "story" )
-                            String story ) {
+        @JsonProperty( "story" )
+        String story ) {
 }

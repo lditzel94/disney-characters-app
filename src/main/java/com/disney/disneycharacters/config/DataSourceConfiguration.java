@@ -25,7 +25,7 @@ public class DataSourceConfiguration {
     @Bean
     @Primary
     public DataSource dataSource() {
-        DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
+        DataSourceBuilder<?> dataSourceBuilder = DataSourceBuilder.create();
         dataSourceBuilder.driverClassName( "org.h2.Driver" );
         dataSourceBuilder.url( "jdbc:h2:mem:testdb" );
         dataSourceBuilder.username( "sa" );
