@@ -26,7 +26,7 @@ class ActorController {
         return service.getAllActors();
     }
 
-    @GetMapping( "/{id}" )
+    @GetMapping( value = "/{id}")
     ActorDetailDto getActorDetailById( @PathVariable Long id ) throws ResourceNotFoundException {
         return service.getActorDetailById( id );
     }

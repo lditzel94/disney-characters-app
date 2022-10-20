@@ -28,7 +28,7 @@ public class Actor {
 
     private Double weight;
 
-    // TODO: Research for @Lob annotation, this may help with data types that need to be large sets
+    @Lob
     private String story;
 
     @ManyToMany( mappedBy = "actors", fetch = LAZY, cascade = PERSIST )
